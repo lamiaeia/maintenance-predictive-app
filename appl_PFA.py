@@ -1,4 +1,3 @@
-# -- coding: utf-8 --
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -13,10 +12,10 @@ import os
 import numpy as np
 import pytz
 import matplotlib
-matplotlib.use('Agg')  # KHASSA T-KON QBEL "import matplotlib.pyplot as plt"
+matplotlib.use('Agg')  
 
 # ============================================================
-# 🟢 CONFIGURATION FLASK
+#  CONFIGURATION FLASK
 # ============================================================
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'votre_cle_secrete_ici'
@@ -25,7 +24,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # ============================================================
-# 🧱 MODELES DE LA BASE DE DONNEES
+#  MODELES DE LA BASE DE DONNEES
 # ============================================================
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,7 +55,7 @@ with app.app_context():
     db.create_all()
 
 # ============================================================
-# 🔮 CHARGEMENT DES MODELES ML
+#  CHARGEMENT DES MODELES ML
 # ============================================================
 rf_model = None
 cox_model = None
@@ -82,7 +81,7 @@ else:
     print(f"⚠ Modèle Cox non trouvé à {COX_PATH}")
 
 # ============================================================
-# 🔮 MAPPING TYPE MACHINE (FR)
+#  MAPPING TYPE MACHINE 
 # ============================================================
 type_map = {
     0: "Élevé",
@@ -93,7 +92,7 @@ type_inv_map = {v: k for k, v in type_map.items()}
 
 
 # ============================================================
-# 🔐 LOGIN & INSCRIPTION
+#  LOGIN & INSCRIPTION
 # ============================================================
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -129,7 +128,7 @@ def logout():
     return redirect(url_for("login"))
 
 # ============================================================
-# 🏠 PAGE PRINCIPALE – PREDICTION
+#  PAGE PRINCIPALE – PREDICTION
 # ============================================================
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -223,7 +222,7 @@ def index():
                            last_pred=last_pred)
 
 # ============================================================
-# 📊 ANALYSE & VISUALISATION
+#  ANALYSE & VISUALISATION
 # ============================================================
 @app.route("/analyze")
 def analyze():
@@ -353,14 +352,13 @@ def history():
 
 # ============================================================
 # ============================================================
-# 🚀 LANCEMENT
+#  LANCEMENT
 # ============================================================
 
-# 1. Had l-function khassha t-kon l-foq (Qbel l-run)
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db.session.remove()
 
-# 2. L-run khasso y-kon houwa l-akhir f l-file
+
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
