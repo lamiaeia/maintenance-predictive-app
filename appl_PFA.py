@@ -60,8 +60,10 @@ with app.app_context():
 rf_model = None
 cox_model = None
 
-RF_PATH = r"C:/Users/HP/Desktop/ia/appl_PFA/model_M_RF_1.pkl"
-COX_PATH = r"C:/Users/HP/Desktop/ia/appl_PFA/coxph_1.pkl"
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RF_PATH = os.path.join(BASE_DIR, "model_M_RF_1.pkl")
+COX_PATH = os.path.join(BASE_DIR, "coxph_1.pkl")
 
 if os.path.exists(RF_PATH):
     try:
