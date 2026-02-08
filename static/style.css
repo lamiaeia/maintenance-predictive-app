@@ -1,5 +1,5 @@
 /* =====================================================
-   GLOBAL STYLE (Professional – Tech)
+   GLOBAL STYLE 
    ===================================================== */
 body {
     font-family: 'Segoe UI', sans-serif;
@@ -245,22 +245,21 @@ tr:hover {
 }
 
 /* =====================================================
-   RETOUR BUTTON (AJOUTÉ)
+   RETOUR BUTTON 
    ===================================================== */
 .retour-link {
     background-color: #2563eb;
     color: white !important;
     padding: 10px 18px;
-    border-radius: 10px 0px 0px 10px; /* Ila bghitih y-ji laseq, derya l-limen tkun murabba3a */
+    border-radius: 10px 0px 0px 10px; 
     font-size: 18px;
     text-decoration: none;
     font-weight: bold;
     
-    /* MODIFICATIONS HNA: */
-    position: relative; /* Badelha men absolute l relative */
-    top: auto;          /* 7eyed l-qdim */
-    right: 0;           /* Laseq f l-7ayt */
-    margin-right: 0;    /* Ta7iyed l-margin */
+    position: relative; 
+    top: auto;          
+    right: 0;           
+    margin-right: 0;    
     
     z-index: 1000;
     transition: 0.3s;
@@ -310,17 +309,15 @@ tr:hover {
 }
 
 /* =====================================================
-   NOUVEAU MENU NAVIGATION (Added)
-   ===================================================== */
+   NOUVEAU MENU NAVIGATION 
+===================================================== */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 40px;
     background: rgba(0, 0, 0, 0.8);
-    /* Khlefya k7ala chwiya transparent */
     border-bottom: 2px solid #3b82f6;
-    /* Khet zra9 l-ta7t */
 }
 
 .logo {
@@ -329,7 +326,6 @@ header {
     color: white;
 }
 
-/* Style dyal l-Menu wastani */
 .top-menu {
     display: flex;
     gap: 20px;
@@ -343,26 +339,19 @@ header {
     padding: 8px 15px;
     border-radius: 5px;
     transition: all 0.3s ease;
-    /* Animation */
 }
 
-/* Animation mli kadoz la souris */
 .menu-link:hover {
     color: white;
     background: rgba(59, 130, 246, 0.2);
-    /* Khalefya zri9a khfifa */
     transform: translateY(-2px);
-    /* Kaytla3 chwiya lfo9 */
 }
 
-/* L-Page li rak fiha daba */
 .menu-link.active {
     color: #3b82f6;
-    /* Loun zra9 nase7 */
     border-bottom: 2px solid #3b82f6;
 }
 
-/* Style dyal bouton Deconnexion */
 .logout-btn {
     background: #ef4444;
     color: white;
@@ -462,7 +451,6 @@ header {
     max-width: 100%;
     height: auto;
     background: transparent;
-    /* Charts already have transparent bg or styled in backend */
     padding: 0;
     box-shadow: none;
 }
@@ -472,20 +460,18 @@ header {
    ===================================================== */
 .analyze-top-bar {
     width: 100%;
-    padding: 20px 0px; /* Reddiha 0px f l-limen o l-yesser */
+    padding: 20px 0px;
     display: flex;
-    justify-content: flex-end; /* Dakchi l-limen nichan */
+    justify-content: flex-end; 
     align-items: center;
     background: transparent;
 }
-/* Modification du menu Type pour fixer le texte invisible */
 select option {
-    background-color: #212529 !important; /* Khalfiya ghamqa */
-    color: white !important;              /* Ktiba bayda */
+    background-color: #212529 !important; 
+    color: white !important;              
     padding: 10px !important;
 }
 
-/* Fix pour certains navigateurs (Chrome/Edge) */
 select:focus option {
     background-color: #212529 !important;
     color: white !important;
