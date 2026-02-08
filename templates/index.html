@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Maintenance Prédictive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark-theme">
+
+<header>
+    <div class="logo">⚙ Maintenance Prédictive</div>
+    
+    <nav class="top-menu">
+        <a href="/" class="menu-link active">Accueil</a>
+        <a href="/analyze" class="menu-link">Analyse</a>
+        <a href="/history" class="menu-link">Historique</a>
+    </nav>
+
+    <div class="user-info">
+        <a href="/logout" class="logout-btn">Déconnexion</a>
+    </div>
+</header>
+
+<main>
+    <div class="welcome-container" style="text-align: center; margin-bottom: 20px;">
+        <h2 style="color: white;">Bonjour, <span style="color: #e9eaed;">{{ username }}</span> </h2>
+        <p style="color: #cbd5e1;">Prêt pour analyser vos machines ?</p>
+    </div>
+    <div class="form-card">
+        <h2>Entrez les caractéristiques de la machine</h2>
+        <form method="POST">
+            <label>Type :</label>
+            <select name="type_input" required>
+                {% for key, value in type_map.items() %}
+                    <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Température de l'air (K):</label>
+            <input type="number" step="0.1" name="air_temp" required>
+
+            <label>Température du processus (K):</label>
+            <input type="number" step="0.1" name="proc_temp" required>
+
+            <label>Vitesse de rotation (tr/min):</label>
+            <input type="number" step="0.1" name="rot_speed" required>
+
+            <label>Couple (Nm):</label>
+            <input type="number" step="0.1" name="torque" required>
+
+            <label>Usure de l'outil(min):</label>
+            <input type="number" name="tool_wear" required>
+
+            <button type="submit">🔍 Lancer la prédiction</button>
+        </form>
+
+    </div>
+
+    {% if result %}
+        <div class="result-box {% if '⚠' in result %}alert{% else %}ok{% endif %}">
+            <h3>{{ result }}</h3>
+            {% if temps_restant %}
+                <p>⏳ Temps restant estimé : {{ temps_restant }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if last_pred %}
+    <div class="history-preview">
+        <h2>Dernière prédiction </h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Type </th>
+                <th>Température de l'air (K)</th>
+                <th>Température du processus (K)</th>
+                <th>Vitesse de rotation(tr/min)</th>
+                <th>Couple(Nm)</th>
+                <th>Usure de l'outil (min)</th>
+                <th>Résultat</th>
+                <th>Temps restant estimé</th>
+            </tr>
+
+            <tr>
+                <td>{{ last_pred.id }}</td>
+                <td>{{ last_pred.type_input }}</td>
+                <td>{{ last_pred.air_temp }}</td>
+                <td>{{ last_pred.proc_temp }}</td>
+                <td>{{ last_pred.rot_speed }}</td>
+                <td>{{ last_pred.torque }}</td>
+                <td>{{ last_pred.tool_wear }}</td>
+                <td>{{ last_pred.result }}</td>
+                <td>{{ last_pred.temps_restant }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+
+</main>
+</body>
+</html>

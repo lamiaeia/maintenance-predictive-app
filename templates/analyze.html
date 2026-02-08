@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Analyse – Maintenance Prédictive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dark-theme">
+
+<div class="analyze-top-bar">
+    <a href="/" class="retour-link">← Retour</a>
+</div>
+
+
+
+
+<main>
+
+{% if empty %}
+<p style="text-align:center; font-size:20px;">
+    Aucune prédiction disponible.
+</p>
+
+{% else %}
+
+<!-- ================= KPI ================= -->
+<section class="kpi-section">
+    <div class="kpi-card"> Total Prédictions<br><b>{{ total_preds }}</b></div>
+    <div class="kpi-card">⚠ Nombre Pannes<br><b>{{ nb_pannes }}</b></div>
+    <div class="kpi-card">🛠 Temps d'usure moyen<br><b>{{ wear_moyen }}</b></div>
+</section>
+
+<!-- ================= RECOMMANDATION ================= -->
+<section class="recommendation-section">
+    <div class="rec-card {% if 'Action requise' in recommendation_text %}rec-danger{% else %}rec-success{% endif %}">
+        <h3>💡 Recommandation IA</h3>
+        <p>{{ recommendation_text }}</p>
+    </div>
+</section>
+
+<!-- ================= GRAPHS ================= -->
+<section class="chart-section">
+    <div class="chart-container">
+        <h3>Temps Restant (RUL)</h3>
+        <img src="data:image/png;base64,{{ rul_chart }}">
+    </div>
+
+    <div class="chart-container">
+        <h3>Facteurs Impactant la Panne</h3>
+        <img src="data:image/png;base64,{{ factors_chart }}">
+    </div>
+
+    <div class="chart-container">
+        <h3>État Global de la machine</h3>
+        <img src="data:image/png;base64,{{ radar_chart }}">
+    </div>
+</section>
+
+{% endif %}
+</main>
+
+</body>
+</html>

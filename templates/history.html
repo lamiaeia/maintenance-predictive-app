@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Historique – Maintenance Prédictive</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        html, body {
+            margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6); /* نفس لون الكادر */
+        }
+
+
+        main {
+            padding: 20px 40px;
+            min-height: calc(100vh - 120px);
+        }
+
+        .history-table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+        }
+
+        table.custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        table.custom-table th {
+            background: #3b82f6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table.custom-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-panne {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .status-ok {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="analyze-top-bar">
+    <a href="/" class="retour-link">← Retour</a>
+</div>
+
+<main>
+    <div class="history-table-container">
+        {% if predictions|length == 0 %}
+            <p>Aucun historique trouvé pour l'instant.</p>
+        {% else %}
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Type de machine</th>
+                    <th>Température de l'air (K)</th>
+                    <th>Température du processus (K)</th>
+                    <th>Vitesse de rotation (tr/min)</th>
+                    <th>Couple (Nm)</th>
+                    <th>Usure de l'outil (min)</th>
+                    <th>Résultat</th>
+                    <th>Temps restant estimé (min)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in predictions %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.date.strftime("%d/%m/%Y %H:%M") }}</td>
+                    <td>{{ p.type_input }}</td>
+                    <td>{{ p.air_temp }}</td>
+                    <td>{{ p.proc_temp }}</td>
+                    <td>{{ p.rot_speed }}</td>
+                    <td>{{ p.torque }}</td>
+                    <td>{{ p.tool_wear }}</td>
+                    <td class="{% if '⚠' in p.result %}status-panne{% else %}status-ok{% endif %}">
+                        {{ p.result }}
+                    </td>
+                    <td>{{ p.temps_restant }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</main>
+
+</body>
+</html>
