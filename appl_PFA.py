@@ -96,7 +96,7 @@ type_inv_map = {v: k for k, v in type_map.items()}
 # ============================================================
 #  LOGIN & INSCRIPTION
 # ============================================================
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/Login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form["username"]
@@ -121,8 +121,8 @@ def login():
                 session['username'] = user.username
                 return redirect(url_for("index"))
             else:
-                return render_template("login.html", error="Nom d'utilisateur ou mot de passe incorrect ❌")
-    return render_template("login.html")
+                return render_template("Login.html", error="Nom d'utilisateur ou mot de passe incorrect ❌")
+    return render_template("Login.html")
 
 @app.route("/logout")
 def logout():
